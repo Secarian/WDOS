@@ -1,0 +1,10 @@
+2024-01-03 20:08:18.955304|Auth             [INFO]New authentication session key generated
+2024-01-03 20:08:18.979578|Storage          [ERROR]Storage configuration file not found. Using internal storage only. open ./system/storage.json: The system cannot find the file specified.
+2024-01-03 20:08:18.991025|APT              [INFO]Package Manager Initiated
+2024-01-03 20:08:18.998653|File System      [INFO]Started File Version History Cleaning in background
+2024-01-03 20:08:18.998653|Desktop          [INFO]Starting Desktop Services
+2024-01-03 20:08:19.001382|File System      [INFO]Startup File Version History Cleaning Completed
+2024-01-03 20:08:19.006934|Scheduler        [INFO]Scheduler started
+2024-01-03 20:08:19.638392|System           [INFO]Operation System: windows
+2024-01-03 20:08:19.638392|System           [INFO]System Architecture: amd64
+2024-01-03 20:08:19.640655|Network          [INFO]Starting ArOZ Network Services
