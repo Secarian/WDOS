@@ -2,8 +2,8 @@
     "author": "Secarian",
     "version": "1.0",
     "keys": {
-        "en-us": {
-            "name": "English (US)",
+        "de-de": {
+            "name": "Deutsch",
             "fontFamily":"",
             "strings": {
                 "title/title": "File Manager",
