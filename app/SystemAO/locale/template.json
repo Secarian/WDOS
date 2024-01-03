@@ -1,45 +1,32 @@
 {
-    "author": "tobychui",
-    "version": "1.0",
-    "keys": {
-        "zh-tw": {
-            "name": "繁體中文（台灣）",
-            "fwtitle" : "",
-            "strings":{
+  "author": "Secarian",
+  "version": "1.0",
+  "keys": {
+    "de-de": {
+      "name": "Deutsch (Deutschland)",
+      "fwtitle" : "Benutzerkontenverwaltung",
+      "strings": {
+        "desc/currentAccount": "Aktuelles Konto",
+        "desc/savedAccount": "In diesem Browser gespeicherte Konten",
+        "desc/sign-in-new": "Anmeldung für ein neues Konto",
+        "desc/username": "Benutzername",
+        "desc/password": "Passwort",
+        "desc/enterPassword": "Geben Sie Ihr Passwort ein, um die Sitzung fortzusetzen",
+        "desc/switchAccount": "Lokalkonto hinzufügen",
+        "desc/noAlternative": "In diesem Browser ist kein anderes Konto gespeichert",
+        "desc/sessionValid": "Sitzung gültig",
+        "desc/sessionExpired": "Sitzung abgelaufen",
+        "desc/addAccount": "Lokales Konto hinzufügen",
+        "desc/signoutAll": "Andere gespeicherte Konten abmelden",
 
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        },
-        "zh-hk": {
-            "name": "繁體中文（香港）",
-            "fwtitle" : "",
-            "strings":{
-
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        },
-        "zh-cn": {
-            "name": "简体中文（简体）",
-            "fwtitle" : "",
-            "strings":{
-                
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        }
+        "msg/logout/confirm": "Dadurch werden alle anderen Konten in diesem Browser abgemeldet. Bestätigen Sie?",
+        "msg/logout/thisAcConfirm": "Möchten Sie die Sitzung beenden? Bestätigen Sie?",
+        "button/login": "Anmelden",
+        "button/logout": "Abmelden",
+        "": ""
+      },
+      "titles": {},
+      "placeholder": {}
     }
+  }
 }
