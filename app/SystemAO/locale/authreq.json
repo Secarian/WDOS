@@ -43,3 +43,48 @@
         }
     }
 }
+{
+    "author": "tobychui",
+    "version": "1.0",
+    "keys": {
+        "zh-tw": {
+            "fontFamily": "\"Arial\", \"Helvetica\", sans-serif",
+            "strings": {
+                "page/title": "Administrator-Authentifizierung",
+                "button/confirm": "Bestätigen",
+                "button/cancel": "Abbrechen",
+                "": ""
+            },
+            "placeholder": {
+                "Username": "Benutzername",
+                "Password": "Passwort"
+            }
+        }, 
+        "zh-hk": {
+            "fontFamily": "\"Arial\", \"Helvetica\", sans-serif",
+            "strings": {
+                "page/title": "Administrator-Authentifizierung",
+                "button/confirm": "Bestätigen",
+                "button/cancel": "Abbrechen",
+                "": ""
+            },
+            "placeholder": {
+                "Username": "Benutzername",
+                "Password": "Passwort"
+            }
+        },
+        "de-de": {
+            "fontFamily": "\"Arial\", \"Helvetica\", sans-serif",
+            "strings": {
+                "page/title": "Administrator-Authentifizierung",
+                "button/confirm": "Bestätigen",
+                "button/cancel": "Abbrechen",
+                "": ""
+            },
+            "placeholder": {
+                "Username": "Benutzername",
+                "Password": "Passwort"
+            }
+        }
+    }
+}
