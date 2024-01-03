@@ -1,126 +1,44 @@
 {
-    "author": "tobychui",
-    "version": "1.0",
-    "keys": {
-        "zh-tw": {
-            "fontFamily":"\"Microsoft JhengHei\",\"SimHei\", \"Apple LiGothic Medium\", \"STHeiti\"",
-            "fwtitle" : "檔案分享",
-            "strings":{
-                "title/title": "檔案分享",
-                "button/copy":"複製到剪貼簿",
-                "button/remove":"移除分享",
-                "button/copied":"已複製！",
+  "author": "Secarian",
+  "version": "1.0",
+  "keys": {
+    "de-de": {
+      "fontFamily": "'Arial', 'sans-serif'",
+      "fwtitle": "Dateifreigabe",
+      "strings": {
+        "title/title": "Dateifreigabe",
+        "button/copy": "In die Zwischenablage kopieren",
+        "button/remove": "Freigabe entfernen",
+        "button/copied": "Kopiert!",
 
-                "share/setting/title":"分享設定",
-                "share/setting/subtitle":"設定誰可以存取此檔案",
-                "share/setting/options":"取存設定：",
-                "share/setting/anyoneWithLink":"擁有連接的使用者",
-                "share/setting/anyoneWithLink/desc":"任何擁有分享連接的使用者皆可下載此檔案",
-                "share/setting/anyoneSignedIn":"已登入的使用者",
-                "share/setting/anyoneSignedIn/desc":"任何已登入並擁有分享連接的使用者皆可下載此檔案",
-                "share/setting/sameGroup":"在同一權限群組內的使用者",
-                "share/setting/sameGroup/desc":"任何擁有相同使用者權限的使用者皆可下載此檔案",
-                "share/setting/updated":"存取權限已更新",
+        "share/setting/title": "Freigabeeinstellungen",
+        "share/setting/subtitle": "Legen Sie fest, wer auf diese Datei zugreifen kann",
+        "share/setting/options": "Zugriffseinstellungen:",
+        "share/setting/anyoneWithLink": "Benutzer mit Link",
+        "share/setting/anyoneWithLink/desc": "Jeder Benutzer mit dem Freigabelink kann diese Datei herunterladen",
+        "share/setting/anyoneSignedIn": "Angemeldete Benutzer",
+        "share/setting/anyoneSignedIn/desc": "Jeder angemeldete Benutzer mit dem Freigabelink kann diese Datei herunterladen",
+        "share/setting/sameGroup": "Benutzer in derselben Berechtigungsgruppe",
+        "share/setting/sameGroup/desc": "Jeder Benutzer mit denselben Benutzerberechtigungen kann diese Datei herunterladen",
+        "share/setting/updated": "Zugriffsberechtigungen aktualisiert",
 
-                "share/setting/advance/title":"進階分享選項",
-                "share/setting/advance/users":"指定使用者",
-                "share/setting/advance/usersDesc":"指定已登入之使用者帳戶名稱",
-                "share/setting/advance/usersInstruct":"於下方列表中選擇指定分享的用戶",
-                "share/setting/advance/addUserToSave":"新增最少一名使用者以儲存變更",
-                "share/setting/advance/groups":"指定權限群組",
-                "share/setting/advance/groupsDesc":"使用者只要擁有下述指定之任何一個群組權限皆可存取",
-                "share/setting/advance/groupsInstruct":"於下方列表中選擇指定分享的群組",
-                "share/setting/advance/addGroupToSave":"新增最少一個權限群組以儲存變更",
+        "share/setting/advance/title": "Erweiterte Freigabeoptionen",
+        "share/setting/advance/users": "Benutzer festlegen",
+        "share/setting/advance/usersDesc": "Benutzernamen von angemeldeten Benutzern festlegen",
+        "share/setting/advance/usersInstruct": "Wählen Sie in der Liste unten die Benutzer aus, mit denen Sie die Datei freigeben möchten",
+        "share/setting/advance/addUserToSave": "Mindestens einen Benutzer hinzufügen, um Änderungen zu speichern",
+        "share/setting/advance/groups": "Berechtigungsgruppen festlegen",
+        "share/setting/advance/groupsDesc": "Benutzer mit einer der folgenden Berechtigungsgruppen können auf die Datei zugreifen",
+        "share/setting/advance/groupsInstruct": "Wählen Sie in der Liste unten die Berechtigungsgruppen aus, mit denen Sie die Datei freigeben möchten",
+        "share/setting/advance/addGroupToSave": "Mindestens eine Berechtigungsgruppe hinzufügen, um Änderungen zu speichern",
 
-                "message/removed": "分享已移除",
-                "qr/loading": "載入中"
-               
-            },
-            "titles":{
+        "message/removed": "Freigabe wurde entfernt",
+        "qr/loading": "Laden..."
+      },
+      "titles": {
 
-            },
-            "placeholder":{
+      },
+      "placeholder": {
 
-            }
-        },
-        "zh-hk": {
-            "fontFamily":"\"Microsoft JhengHei\",\"SimHei\", \"Apple LiGothic Medium\", \"STHeiti\"",
-            "fwtitle" : "檔案分享",
-            "strings":{
-                "title/title": "檔案分享",
-                "button/copy":"複製到剪貼簿",
-                "button/remove":"移除分享",
-                "button/copied":"已複製！",
-
-                "share/setting/title":"分享設定",
-                "share/setting/subtitle":"設定誰可以存取此檔案",
-                "share/setting/options":"取存設定：",
-                "share/setting/anyoneWithLink":"擁有連接的使用者",
-                "share/setting/anyoneWithLink/desc":"任何擁有分享連接的使用者皆可下載此檔案",
-                "share/setting/anyoneSignedIn":"已登入的使用者",
-                "share/setting/anyoneSignedIn/desc":"任何已登入並擁有分享連接的使用者皆可下載此檔案",
-                "share/setting/sameGroup":"在同一權限群組內的使用者",
-                "share/setting/sameGroup/desc":"任何擁有相同使用者權限的使用者皆可下載此檔案",
-                "share/setting/updated":"存取權限已更新",
-
-                "share/setting/advance/title":"進階分享選項",
-                "share/setting/advance/users":"指定使用者",
-                "share/setting/advance/usersDesc":"指定已登入之使用者帳戶名稱",
-                "share/setting/advance/usersInstruct":"於下方列表中選擇指定分享的用戶",
-                "share/setting/advance/addUserToSave":"新增最少一名使用者以儲存變更",
-                "share/setting/advance/groups":"指定權限群組",
-                "share/setting/advance/groupsDesc":"使用者只要擁有下述指定之任何一個群組權限皆可存取",
-                "share/setting/advance/groupsInstruct":"於下方列表中選擇指定分享的群組",
-                "share/setting/advance/addGroupToSave":"新增最少一個權限群組以儲存變更",
-
-                "message/removed": "分享已移除",
-                "qr/loading": "載入中"
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        },
-        "zh-cn": {
-            "fwtitle" : "文件分享",
-            "strings":{
-                "title/title": "文件分享",
-                "button/copy":"复制到剪切板",
-                "button/remove":"移除分享",
-                "button/copied":"已复制！",
-
-                "share/setting/title":"分享设置",
-                "share/setting/subtitle":"设置谁可以存取此文件",
-                "share/setting/options":"存取设置：",
-                "share/setting/anyoneWithLink":"拥有链接的使用者",
-                "share/setting/anyoneWithLink/desc":"任何拥有分享链接的使用者均可下载此文件",
-                "share/setting/anyoneSignedIn":"已登录的使用者",
-                "share/setting/anyoneSignedIn/desc":"任何已登录并拥有分享链接的使用者均可下载此文件",
-                "share/setting/sameGroup":"在同一权限群组内的使用者",
-                "share/setting/sameGroup/desc":"任何拥有相同使用者权限的使用者均可下载此文件",
-                "share/setting/updated":"存取权限已更新",
-
-                "share/setting/advance/title":"高级分享选项",
-                "share/setting/advance/users":"指定使用者",
-                "share/setting/advance/usersDesc":"指定已登录的使用者帐户名称",
-                "share/setting/advance/usersInstruct":"于下方列表中选择指定分享的用户",
-                "share/setting/advance/addUserToSave":"新增最少一名使用者以存储变更",
-                "share/setting/advance/groups":"指定权限群组",
-                "share/setting/advance/groupsDesc":"使用者只要拥有下述指定之任何一个群组权限均可存取",
-                "share/setting/advance/groupsInstruct":"于下方列表中选择指定分享的群组",
-                "share/setting/advance/addGroupToSave":"新增最少一个权限群组以存储变更",
-                
-                "message/removed": "分享已移除",
-                "qr/loading": "载入中" 
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        }
-    }
-}
+      }
+    },
