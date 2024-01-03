@@ -1,71 +1,59 @@
-# WDOS 2.0
+# WDOS 0.0.1
 
-This is the go implementation of WDOS (aka ArOZ Online) Web Desktop environment,designed to run on linux, but somehow still works on Windows and Mac OS
+Dies ist die Go-Implementierung der WDOS Web-Desktop-Umgebung, die für Linux entwickelt wurde, aber aus irgendeinem Grund auch auf Windows und Mac OS funktioniert.
 
-This README file is intended for developer only. If you are normal users, please refer to the README file outside of the /src folder. 
+Diese README-Datei richtet sich ausschließlich an Entwickler. Wenn Sie ein normaler Benutzer sind, konsultieren Sie bitte die README-Datei außerhalb des /src-Ordners.
 
-## Development Notes
+## Entwicklungsnotizen
 
-- Start each module with {ModuleName}Init() function, e.g. ```WiFiInit()```
-- Put your function in mod (if possible) and call it in the main program
-- Do not change the sequence in the startup() function unless necessary
-- When in doubt, add startup flags (and use startup flag to disable experimental functions on startup)
+- Beginnen Sie jedes Modul mit der Funktion {ModuleName}Init(), z. B. ```WiFiInit()```.
+- Platzieren Sie Ihre Funktion im Modul (wenn möglich) und rufen Sie sie im Hauptprogramm auf.
+- Ändern Sie die Reihenfolge in der startup() Funktion nicht, es sei denn, es ist notwendig.
+- Bei Unsicherheiten fügen Sie Startflags hinzu (und verwenden Sie Startflags, um experimentelle Funktionen beim Start zu deaktivieren).
 
+## Überschreiben von Vendor-Ressourcen
 
+Wenn Sie Vendor-bezogene Ressourcen in WDOS 0.0.1 oder höher überschreiben möchten, erstellen Sie einen Ordner im Systemstamm mit dem Namen ```vendor-res``` und platzieren Sie die Ersatzdateien hier. Hier ist eine Liste der unterstützten Ersatzressourcendateien:
 
-## Vendor Resources Overwrite
+| Dateiname        | Empfohlenes Format | Verwendung              |
+| ---------------- | ------------------ | ----------------------- |
+| auth_bg.jpg      | 2938 x 1653 px     | Anmeldehintergrund      |
+| auth_icon.png    | 5900 x 1180 px     | Logo der Authentifizierungsseite |
+| vendor_icon.png  | 1560 x 600 px      | Marken-Symbol des Anbieters |
 
-If you want to overwrite vendor related resources in WDOS 2.012 or above, create a folder in the system root named ```vendor-res``` and put the replacement files inside here. Here is a list of supported replacement resources files
+(Wird erweitert)
 
-| Filename        | Recommended Format | Usage                    |
-| --------------- | ------------------ | ------------------------ |
-| auth_bg.jpg     | 2938 x 1653 px     | Login Wallpaper          |
-| auth_icon.png   | 5900 x 1180 px     | Authentication Page Logo |
-| vendor_icon.png | 1560 x 600 px      | Vendor Brand Icon        |
+## Dateisystem-Virtualisierung und Abstraktionsebenen
 
-(To be expanded)
+Das WDOS-System enthält sowohl die Virtualisierungsebene als auch die Abstraktionsebene. Der einfachste Weg zu überprüfen, unter welcher Ebene Ihr Pfad liegt, besteht darin, den Startordnernamen zu betrachten.
 
-## File System Virtualization and File System Abstractions Layers
+| Pfadstruktur                                 | Beispiel Pfad                                        | Ebene                                            |
+| -------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------ |
+| {vroot_id}:/{subpath}                        | user:/Desktop/meinedatei.txt                         | Dateisystem-Virtualisierungsebene (höchste Ebene) |
+| fsh (*Dateisystem-Handler*) + subpath (String)| fsh (localfs) + /dateien/benutzer/alan/Desktop/meinedatei.txt | Dateisystem-Abstraktionsebene                     |
+| {physische_position}/{subpath}                | /home/wd/wdos/dateien/benutzer/Desktop/meinedatei.txt| Physische (Festplatten-) Ebene                    |
 
-The WDOS system contains both the virtualization layer and abstraction layer. The easiest way to check if your path is under which layer is by looking at their starting dir name.
+Seit WDOS v2.000 haben wir der (schon komplexen) Dateisystem-Handler-Infrastruktur eine Dateisystem-Abstraktion (fsa oder manchmal als fshAbs abgekürzt, für "Dateisystem-Handler unterliegende Dateisystemabstraktion") hinzugefügt. Es gibt zwei Arten von fsh, die derzeit von der WDOS-Dateisystem-Abstraktionsebene unterstützt werden.
 
-| Path Structure                                | Example Path                                         | Layer                                            |
-| --------------------------------------------- | ---------------------------------------------------- | ------------------------------------------------ |
-| {vroot_id}:/{subpath}                         | user:/Desktop/myfile.txt                             | File System Virtualization Layer (Highest Layer) |
-| fsh (*File System Handler) + subpath (string) | fsh (localfs) + /files/users/alan/Desktop/myfile.txt | File System Abstraction                          |
-| {physical_location}/{subpath}                 | /home/wd/wdos/files/users/Desktop/myfile.txt     | Physical (Disk) Layer                            |
+## WDOS JavaScript Gateway Interface / Plugin Loader
 
-Since WDOS v2.000, we added File System Abstraction (fsa, or sometime as seen as fshAbs, abbr for "File System Handler underlaying File System Abstraction) to the (already complex) File System Handler (fsh) infrastruture.  There are two type of fsh that are currently supported by WDOS File System Abstraction layer.
+Die WDOS AJGI / AGI-Schnittstelle bietet eine JavaScript-programmierbare Schnittstelle für WDOS-Benutzer zur Erstellung von Plugins für das System. Um das Modul zu initialisieren, können Sie eine "init.agi"-Datei im Webverzeichnis des Moduls (auch als Modul-Stammverzeichnis bezeichnet) platzieren. Weitere Details finden Sie in der [AJGI-Dokumentation](AJGI Dokumentation.md).
 
-## ArOZ JavaScript Gateway Interface / Plugin Loader
+AGI-Skripte können in verschiedenen Bereichen und mit verschiedenen Berechtigungen ausgeführt werden.
 
-The ArOZ AJGI / AGI interface provide a JavaScript programmable interface for WDOS users to create 
-plugin for the system. To initiate the module, you can place a "init.agi" file in the web directory of the module
-(also named the module root). See more details in the [AJGI Documentation](AJGI Documentation.md).
+| Bereich                                        | Verwendbare Funktionen                                                      |
+| ---------------------------------------------- | -------------------------------------------------------------------------- |
+| WebApp-Startskript (init.agi)                  | Systemfunktionen und Registrierungen                                         |
+| In der WebApp enthaltene Skripte                | Systemfunktionen und Benutzerfunktionen                                       |
+| Andere (Web-Root / Serverless / Zeitplaner)     | Systemfunktionen, Benutzerfunktionen (mit Skript-Registrierungsbereich) und Serverless |
 
-AGI script can be run as different scope and permissions. 
+## Unterlogik und Konfiguration von Subdiensten
 
-| Scope                                      | Usable Functions                                                                    |
-| ------------------------------------------ | ----------------------------------------------------------------------------------- |
-| WebApp startup script (init.agi)           | System Functions and Registrations                                                  |
-| WebApp contained scripts                   | System Functions and User Functions                                                 |
-| Others (Web Root / Serverless / Scheduler) | System Functions, User Functions ( with script register owner scope) and serverless |
+Um andere binär basierte Webserver in die Subdienstschnittstelle zu integrieren, erstellen Sie einen Ordner innerhalb von "./subservice/ihres_dienstes", in dem Ihre binäre ausführbare Datei den gleichen Namen wie das enthaltende Verzeichnis haben sollte. Wenn Sie beispielsweise ein Modul haben, das eine Web-UI namens "demo.exe" bereitstellt, sollten Sie die demo.exe in "./subservice/demo/demo.exe" platzieren.
 
-## Subservice Logics and Configuration
+Im Falle einer Linux-Umgebung wird zuerst überprüft, ob das Modul über apt-get installiert ist, indem das "which"-Programm verwendet wird. (Wenn Sie busybox haben, sollte es integriert sein). Wenn das Paket in der apt-Liste nicht gefunden wird, wird die Binärdatei des Programms unter dem Subdienstverzeichnis gesucht.
 
-To intergrate other binary based web server to the subservice interface,
-you can create a folder inside the "./subservice/your_service" where your binary
-executable should be named identically with the containing directory.
-For example, you have a module that provides web ui named "demo.exe",
-then your should put the demo.exe into "./subservice/demo/demo.exe".
-
-In the case of Linux environment, the subservice routine will first if the 
-module is installed via apt-get by checking with the "which" program. (If you got busybox, it should be built in)
-If the package is not found in the apt list, the binary of the program will be searched
-under the subservice directory.
-
-Please follow the naming convention given in the build.sh template.
-For example, the corresponding platform will search for the corresponding binary excitable filename:
+Bitte befolgen Sie die Namenskonvention, die in der build.sh-Vorlage angegeben ist. Zum Beispiel sucht die entsprechende Plattform nach dem entsprechenden binären ausführbaren Dateinamen:
 
 ```
 demo_linux_amd64    => Linux AMD64
@@ -74,64 +62,63 @@ demo_linux_arm64    => Linux ARM64
 demo_macOS_amd64    => MacOS AMD64 
 ```
 
-### Startup Flags
+### Startflags
 
-During the startup of the subservice, two types of parameter will be passed in. Here are the examples
+Während des Starts des Subdienstes werden zwei Arten von Parametern übergeben. Hier sind einige Beispiele:
 
 ```
 demo.exe -info
 demo.exe -port 12810 -rpt "http://localhost:8080/api/ajgi/interface"
 ```
 
-In the case of receiving the "info" flag, the program should print the JSON string with correct module information
-as stated in the struct below.
+Im Falle des Erhalts des "info"-Flags sollte das Programm die JSON-Zeichenfolge mit den korrekten Modulinformationen gemäß der unten stehenden Struktur ausgeben.
 
 ```
-//Struct for storing module information
-type serviecInfo struct{
-    Name string                //Name of this module. e.g. "Audio"
-    Desc string                //Description for this module
-    Group string            //Group of the module, e.g. "system" / "media" etc
-    IconPath string            //Module icon image path e.g. "Audio/img/function_icon.png"
-    Version string            //Version of the module. Format: [0-9]*.[0-9][0-9].[0-9]
-    StartDir string         //Default starting dir, e.g. "Audio/index.html"
-    SupportFW bool             //Support floatWindow. If yes, floatWindow dir will be loaded
-    LaunchFWDir string         //This link will be launched instead of 'StartDir' if fw mode
-    SupportEmb bool            //Support embedded mode
-    LaunchEmb string         //This link will be launched instead of StartDir / Fw if a file is opened with this module
-    InitFWSize []int         //Floatwindow init size. [0] => Width, [1] => Height
-    InitEmbSize []int        //Embedded mode init size. [0] => Width, [1] => Height
-    SupportedExt []string     //Supported File Extensions. e.g. ".mp3", ".flac", ".wav"
+// Struktur zur Speicherung von Modulinformationen
+type serviceInfo struct {
+    Name string                // Name dieses Moduls, z. B. "Audio"
+    Desc string                // Beschreibung dieses Moduls
+    Group string               // Gruppe des Moduls, z. B. "System" / "Medien" usw.
+    IconPath string            // Pfad zum Modul-Icon-Bild, z. B. "Audio/img/funktions_icon.png"
+    Version string             // Version des Moduls. Format: [0-
+
+9]*.[0-9][0-9].[0-9]
+    StartDir string            // Standardstartverzeichnis, z. B. "Audio/index.html"
+    SupportFW bool             // Unterstützung von floatWindow. Wenn ja, wird das floatWindow-Verzeichnis geladen
+    LaunchFWDir string         // Dieser Link wird anstelle von 'StartDir' gestartet, wenn im FW-Modus
+    SupportEmb bool            // Unterstützung des eingebetteten Modus
+    LaunchEmb string           // Dieser Link wird anstelle von StartDir / Fw gestartet, wenn eine Datei mit diesem Modul geöffnet wird
+    InitFWSize []int           // Floatwindow-Initialgröße. [0] => Breite, [1] => Höhe
+    InitEmbSize []int          // Initialgröße im eingebetteten Modus. [0] => Breite, [1] => Höhe
+    SupportedExt []string      // Unterstützte Dateierweiterungen, z. B. ".mp3", ".flac", ".wav"
 }
 
-//Example Usage when reciving the -info flag
-infoObject := serviecInfo{
-        Name: "Demo Subservice",
-        Desc: "A simple subservice code for showing how subservice works in ArOZ Online",            
-        Group: "Development",
-        IconPath: "demo/icon.png",
-        Version: "0.0.1",
-        //You can define any path before the actualy html file. This directory (in this case demo/ ) will be the reverse proxy endpoint for this module
-        StartDir: "demo/home.html",            
-        SupportFW: true, 
-        LaunchFWDir: "demo/home.html",
-        SupportEmb: true,
-        LaunchEmb: "demo/embedded.html",
-        InitFWSize: []int{720, 480},
-        InitEmbSize: []int{720, 480},
-        SupportedExt: []string{".txt",".md"},
-    }
+// Beispiel für die Verwendung beim Erhalten des -info-Flags
+infoObject := serviceInfo{
+    Name: "Demo Subdienst",
+    Desc: "Ein einfacher Subdienstcode, der zeigt, wie Subdienste in WDOS funktionieren",
+    Group: "Entwicklung",
+    IconPath: "demo/icon.png",
+    Version: "0.0.1",
+    StartDir: "demo/home.html",
+    SupportFW: true,
+    LaunchFWDir: "demo/home.html",
+    SupportEmb: true,
+    LaunchEmb: "demo/eingebettet.html",
+    InitFWSize: []int{720, 480},
+    InitEmbSize: []int{720, 480},
+    SupportedExt: []string{".txt", ".md"},
+}
 
-jsonString, _ := json.Marshal(info);
-fmt.Println(string(infoObject))
-os.Exit(0);
+jsonString, _ := json.Marshal(infoObject)
+fmt.Println(string(jsonString))
+os.Exit(0)
 ```
 
-When receiving the port flag, the program should start the web ui at the given port. The following is an example for 
-the implementation of such functionality.
+Beim Erhalt des Port-Flags sollte das Programm die Web-UI am angegebenen Port starten. Hier ist ein Beispiel für die Implementierung einer solchen Funktionalität.
 
 ```
-var port = flag.String("port", ":80", "The default listening endpoint for this subservice")
+var port = flag.String("port", ":80", "Der Standard-Listening-Endpunkt für diesen Subdienst")
 flag.Parse()
 err := http.ListenAndServe(*port, nil)
 if err != nil {
@@ -139,37 +126,33 @@ if err != nil {
 }
 ```
 
-### Subservice Exec Settings
+### Subdienst-Ausführungseinstellungen
 
-In default, subservice routine will create a reverse proxy with URL rewrite build in that serve your web ui launched
-from the binary executable. If you do not need a reverse proxy connection, want a custom launch script or else, you can 
-use the following setting files.
+Standardmäßig erstellt die Subdienstroutine einen Reverse-Proxy mit integriertem URL-Umschreiben, der Ihre Web-UI startet, die von der binären ausführbaren Datei ausgeführt wird. Wenn Sie keine Reverse-Proxy-Verbindung benötigen, ein benutzerdefiniertes Startskript oder sonstiges wünschen, können Sie die folgenden Einstellungsdateien verwenden.
 
 ```
-.noproxy        => Do not start a proxy to the given port
-.startscript    => Send the launch parameter to the "start.bat" or "start.sh" file instead of the binary executable
-.disabled        => Do not load this subservice during startup. But the user can enable it via the setting interface
+.noproxy        => Starten Sie keinen Proxy zum angegebenen Port
+.startscript    => Senden Sie den Startparameter an die "start.bat" oder "start.sh" Datei anstelle der binären ausführbaren Datei
+.disabled       => Diesen Subdienst beim Starten nicht laden. Der Benutzer kann ihn jedoch über die Einstellungsschnittstelle aktivieren
 ```
 
-Here is an example "start.bat" used in integrating Syncthing into ArOZ Online System with ".startscript" file placed next
-to the syncthing.exe file.
+Hier ist ein Beispiel für eine "start.bat"-Datei, die zum Integrieren von Syncthing in das WDOS-Online-System mit einer ".startscript"-Datei neben der syncthing.exe-Datei verwendet wird.
 
 ```
 if not exist ".\config" mkdir ".\config"
 syncthing.exe -home=".\config" -no-browser -gui-address=127.0.0.1%2
 ```
 
-## Systemd support
+## Systemd-Unterstützung
 
-To enable systemd in your host that support wd online system, create a bash script at your wd online root named "start.sh"
-and fill it up with your prefered startup paratmers. The most basic one is as follow:
+Um systemd in Ihrem Host zu aktivieren, der das WDOS-Online-System unterstützt, erstellen Sie ein Bash-Skript in Ihrem WDOS-Online-Stammverzeichnis mit dem Namen "start.sh" und füllen Sie es mit Ihren bevorzugten Startparametern. Der einfachste ist wie folgt:
 
 ```
 #/bin/bash
-sudo ./wd_online_linux_amd64
+sudo ./wdos_online_linux_amd64
 ```
 
-And then you can create a new file called "wdos.service" in /etc/systemd/system with the following contents (Assume your wd online root is at /home/pi/wdos)
+Danach können Sie eine neue Datei namens "wdos.service" in /etc/systemd/system mit dem folgenden Inhalt erstellen (angenommen, Ihr WDOS-Online-Stammverzeichnis befindet sich unter /home/pi/wdos):
 
 ```
 [Unit]
@@ -187,19 +170,18 @@ RestartSec=10
 WantedBy=multi-user.target
 ```
 
-Finally to enable the service, use the following systemd commands
+Schließlich, um den Dienst zu aktivieren, verwenden Sie die folgenden systemd-Befehle:
 
 ```
-#Enable the script during the startup process
+# Skript während des Startvorgangs aktivieren
 sudo systemctl enable wdos.service
 
-#Start the service now
+# Den Dienst jetzt starten
 sudo systemctl start wdos.service
 
-#Show the status of the service
+# Den Status des Dienstes anzeigen
 systemctl status wdos.service
 
-
-#Disable the service if you no longer want it to start during boot
+# Den Dienst deaktivieren, wenn Sie ihn beim Start nicht mehr starten möchten
 sudo systemctl disable wd-online.service
 ```
