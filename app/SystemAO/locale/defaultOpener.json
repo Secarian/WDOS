@@ -1,56 +1,31 @@
 {
-    "author": "tobychui",
+    "author": "Secarian",
     "version": "1.0",
     "keys": {
-        "zh-tw": {
-            "fwtitle" : "選擇預設網頁應用程式",
-            "fontFamily":"\"Microsoft JhengHei\",\"SimHei\", \"Apple LiGothic Medium\", \"STHeiti\"",
-            "strings":{
-                "message/select":"請選擇用作開啟 ",
-                "message/files":" 檔案的預設網頁應用程式",
-
-                "button/showAll":"顯示全部應用程式",
-                "button/showRelevent":"顯示相關應用程式",
-                "button/cancel":"取消",
-                "button/confirm":"確認",
-                "":""
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
+        "de-de": {
+            "fwtitle": "Wählen Sie die Standard-Webanwendung",
+            "fontFamily": "\"Arial\", \"Helvetica\", sans-serif",
+            "strings": {
+                "message/select": "Bitte wählen Sie als Öffnungsanwendung für",
+                "message/files": " Dateien",
+                "button/showAll": "Alle Anwendungen anzeigen",
+                "button/showRelevent": "Relevante Anwendungen anzeigen",
+                "button/cancel": "Abbrechen",
+                "button/confirm": "Bestätigen",
+                "": ""
             }
         },
-        "zh-hk": {
-            "fwtitle" : "",
-            "strings":{
-
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
-            }
-        },
-        "zh-cn": {
-            "fwtitle" : "选择预设网页应用程序",
-            "strings":{
-                "message/select":"请选择用于打开 ",
-                "message/files":" 文件的预设网页应用程序",
-
-                "button/showAll":"显示全部应用程序",
-                "button/showRelevent":"显示相关应用程序",
-                "button/cancel":"取消",
-                "button/confirm":"确定",
-                "":""
-            },
-            "titles":{
-
-            },
-            "placeholder":{
-
+        "en-en": {
+            "fwtitle": "Select Default Web Application",
+            "fontFamily": "\"Arial\", \"Helvetica\", sans-serif",
+            "strings": {
+                "message/select": "Please select as the opening application for",
+                "message/files": " files",
+                "button/showAll": "Show all applications",
+                "button/showRelevent": "Show relevant applications",
+                "button/cancel": "Cancel",
+                "button/confirm": "Confirm",
+                "": ""
             }
         }
     }
