@@ -9,12 +9,12 @@ import (
 )
 
 var (
-	AGIGateway *agi.Gateway
+	WDGIGateway *wdgi.Gateway
 )
 
-func AGIInit() {
-	//Create new AGI Gateway object
-	gw, err := agi.NewGateway(agi.AgiSysInfo{
+func WDGIInit() {
+	//Create new WDGI Gateway object
+	gw, err := wdgi.NewGateway(wdgi.WdgiSysInfo{
 		BuildVersion:         build_version,
 		InternalVersion:      internal_version,
 		LoadedModule:         moduleHandler.GetModuleNameList(),
@@ -30,11 +30,11 @@ func AGIInit() {
 		TempFolderPath:       *tmp_directory,
 	})
 	if err != nil {
-		systemWideLogger.PrintAndLog("AGI", "AGI Gateway Initialization Failed", err)
+		systemWideLogger.PrintAndLog("WDGI", "WDGI Gateway Initialization Failed", err)
 	}
 
 	//Register user request handler endpoint
-	http.HandleFunc("/system/ajgi/interface", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/system/wdgi/interface", func(w http.ResponseWriter, r *http.Request) {
 		//Require login check
 		authAgent.HandleCheckAuth(w, r, func(w http.ResponseWriter, r *http.Request) {
 			//API Call from actual human users
@@ -44,7 +44,7 @@ func AGIInit() {
 	})
 
 	//Register external API request handler endpoint
-	http.HandleFunc("/api/ajgi/interface", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/api/wdgi/interface", func(w http.ResponseWriter, r *http.Request) {
 		//Check if token exists
 		token, err := utils.PostPara(r, "token")
 		if err != nil {
@@ -58,7 +58,7 @@ func AGIInit() {
 			//Valid
 			thisUsername, err := gw.Option.UserHandler.GetAuthAgent().GetTokenOwner(token)
 			if err != nil {
-				systemWideLogger.PrintAndLog("AGI", "Unable to validate token owner", err)
+				systemWideLogger.PrintAndLog("WDGI", "Unable to validate token owner", err)
 				w.WriteHeader(http.StatusInternalServerError)
 				w.Write([]byte("500 - Internal Server Error"))
 				return
@@ -73,20 +73,20 @@ func AGIInit() {
 
 	})
 
-	http.HandleFunc("/api/ajgi/exec", gw.HandleAgiExecutionRequestWithToken)
+	http.HandleFunc("/api/wdgi/exec", gw.HandleAgiExecutionRequestWithToken)
 
-	// external AGI related function
-	externalAGIRouter := prout.NewModuleRouter(prout.RouterOption{
-		ModuleName:  "ARZ Serverless",
+	// external WDGI related function
+	externalWDGIRouter := prout.NewModuleRouter(prout.RouterOption{
+		ModuleName:  "WDE Serverless",
 		AdminOnly:   false,
 		UserHandler: userHandler,
 		DeniedHandler: func(w http.ResponseWriter, r *http.Request) {
 			errorHandlePermissionDenied(w, r)
 		},
 	})
-	externalAGIRouter.HandleFunc("/api/ajgi/listExt", gw.ListExternalEndpoint)
-	externalAGIRouter.HandleFunc("/api/ajgi/addExt", gw.AddExternalEndPoint)
-	externalAGIRouter.HandleFunc("/api/ajgi/rmExt", gw.RemoveExternalEndPoint)
+	externalWDGIRouter.HandleFunc("/api/wdgi/listExt", gw.ListExternalEndpoint)
+	externalWDGIRouter.HandleFunc("/api/wdgi/addExt", gw.AddExternalEndPoint)
+	externalWDGIRouter.HandleFunc("/api/wdgi/rmExt", gw.RemoveExternalEndPoint)
 
-	AGIGateway = gw
+	WDGIGateway = gw
 }
